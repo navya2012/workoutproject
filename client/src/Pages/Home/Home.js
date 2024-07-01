@@ -6,9 +6,13 @@ import './HomeStyles.css'
 const Home = () => {
   return (
    <>
-    <section className='home-section'>
-      <Records/>
-      <Form/>
+     <section className='home-section'>
+      <div className='records'>
+        <Records />
+      </div>
+      <div className='forms'>
+        <Form />
+      </div>
     </section>
    </>
   )

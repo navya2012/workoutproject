@@ -1,13 +1,21 @@
 
-
-
 const userModels = require('../models/userModel')
 
-  
 const createToken = require("../Utils/Token")
 
 const loginDetails = async (req,res) => {
-    res.json({msg:'User logged in'})
+    const {  email,password} = req.body
+    try{
+     // store data into db
+     const user = await userModels.login(email,password)
+
+     //create token
+     const token = createToken(user._id)
+     res.status(200).json({email,password, token})
+    }
+    catch(err){
+     res.status(400).json({error: err.message})
+    }
 } 
 
 
@@ -17,11 +25,9 @@ const signUpDetails = async (req,res) => {
     // store data into db
     const user = await userModels.signup(email,password)
 
-    console.log(` user data added`)
     //create token
     const token = createToken(user._id)
-
-    res.status(200).json({user, token})
+    res.status(200).json({email,password, token})
    }
    catch(err){
     res.status(400).json({error: err.message})

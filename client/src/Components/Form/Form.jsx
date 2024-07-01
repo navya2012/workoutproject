@@ -2,8 +2,11 @@ import React, { useContext } from 'react'
 import { WorkoutDataList } from '../../Context/WorkoutContext'
 import axios from 'axios'
 import './FormStyles.css'
+import useAuthContext from '../../Hooks/useAuthContext'
 
 const Form = () => {
+
+  const {user} = useAuthContext()
 
   const { form, setForm, setWorkoutData, workoutData, getWorkoutsData, setUpdateForm, updateForm }
     = useContext(WorkoutDataList)
@@ -21,7 +24,11 @@ const Form = () => {
   const createSubmitData = async (e) => {
     e.preventDefault()
 
-    const response = await axios.post('http://localhost:4000/api/workouts', form)
+    const response = await axios.post('http://localhost:4000/api/workouts', form,  {
+      headers:{
+        "Authorization" : `Bearer ${user?.token}`
+      }
+    })
     setWorkoutData([...workoutData, response])
     setForm({
       title: '',
@@ -50,6 +57,11 @@ const Form = () => {
       title,
       reps,
       load
+    },
+     {
+      headers:{
+        "Authorization" : `Bearer ${user?.token}`
+      }
     })
     getWorkoutsData()
     setUpdateForm({
@@ -61,6 +73,7 @@ const Form = () => {
   }
   return (
     <>
+    <div className=''>
       {
         !updateForm._id && (
           <div className='form'>
@@ -72,7 +85,7 @@ const Form = () => {
               </div>
               <div className="field">
                 <label htmlFor="">Reps:</label>
-                <input type="tel" name='reps' value={form.reps} onChange={handleChange} />
+                <input type="tel" name='reps' value={form.reps} onChange={handleChange} autoComplete='off' />
               </div>
               <div className="field">
                 <label htmlFor="">Load (in Kg):</label>
@@ -107,7 +120,7 @@ const Form = () => {
           </div>
         )
       }
-
+</div>
     </>
   )
 }

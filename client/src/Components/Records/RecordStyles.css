@@ -1,11 +1,20 @@
 
+.record-container{
+    display: flex;
+    justify-content:start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    column-gap: 50px;
+    row-gap: 20px;
+    padding: 0 20px;
+}
 .record{
     background-color: white;
-    width: 600px;
+width:300px;
     padding: 20px 30px;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items:center;
     flex-direction: column;
     gap: 10px;
     border-radius: 10px;
@@ -13,11 +22,16 @@
     rgba(0,0,0,0.3) 0px 1px 3px -1px;
     position: relative;
     margin-bottom: 20px;
+    line-height: 1;
 }
 
 .record h1{
     color: #1aac83;  
-    /*  */
+    font-size: 28px;
+}
+
+.record p{
+    font-size: 18px;
 }
 
 .record .btns{
@@ -25,9 +39,9 @@
     justify-content: center;
     align-items: center;
     gap: 15px;
-    position: absolute;
+    /* position: absolute;
     top: 10px; right: 10px;
-    padding: 10px 0;
+    padding: 10px 0; */
 }
 
 .record .btns button{
@@ -44,3 +58,10 @@
 .record .btns button:hover{
     transform: scale(1.05);
 }
+
+@media (max-width: 768px) {
+    .record-container {
+      justify-content: center; 
+      align-items: center; 
+    }
+  }

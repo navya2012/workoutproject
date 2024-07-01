@@ -5,6 +5,7 @@
     align-items: center;
     flex-direction: column;
     height: 80vh;
+    
 }
 
 .main-form h1{
@@ -23,7 +24,8 @@
     rgba(0,0,0,0.3) 0px 1px 3px -1px;
     border-radius: 5px;
     flex-direction: column;
-    width: 30%;
+    max-width: 100%;
+    width: 350px;
     gap: 20px;
 }
 
@@ -64,4 +66,31 @@
 
 .main-form form button:hover{
     transform: scale(1.05);
+}
+
+@media (max-width:768px){
+    .main-form form{
+        padding: 30px;
+        width: 300px;
+    }
+}
+
+/*  */
+/* Add these styles to your existing CSS file */
+
+.password-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-wrapper input {
+    width: 100%;
+    padding-right: 2.5rem; /* adjust if needed */
+}
+
+.password-toggle-icon {
+    position: absolute;
+    right: 0.75rem; /* adjust if needed */
+    cursor: pointer;
 }

@@ -3,8 +3,13 @@ const express = require("express")
 
 const router = express.Router()
 
+const authUser = require("../middleware/userMiddleware")
+
 //controllers
 const { getWorkoutData, getWorkoutDataById, createWorkoutData, updateWorkoutData, deleteWorkoutData } = require('../controllers/workoutController')
+
+ router.use(authUser)
+
 
 //get entire data 
 router.get('/', getWorkoutData)

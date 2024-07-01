@@ -2,17 +2,26 @@ import React, { useContext, useEffect } from 'react'
 import { WorkoutDataList } from '../../Context/WorkoutContext'
 import axios from 'axios'
 import './RecordStyles.css'
+import useAuthContext from '../../Hooks/useAuthContext'
 
 const Records = () => {
     const { workoutData, getWorkoutsData ,setUpdateForm} = useContext(WorkoutDataList)
 
+    const {user} = useAuthContext()
+
     useEffect(() => {
-        getWorkoutsData()
-    }, [getWorkoutsData])
+        if(user){
+            getWorkoutsData()
+        }
+    }, [user, getWorkoutsData])
 
     //delete
     const handleDeleteData = async (_id) => {
-        await axios.delete(`http://localhost:4000/api/workouts/${_id}`)
+        await axios.delete(`http://localhost:4000/api/workouts/${_id}` ,  {
+            headers:{
+              "Authorization" : `Bearer ${user?.token}`
+            }
+          })
         getWorkoutsData()
     }
 
@@ -27,10 +36,12 @@ const Records = () => {
       }
     return (
         <>  
-        <div>
+        <div className='container'>
+        <div className='record-container'>
             {
                 workoutData && workoutData.map((item) => {
                     return (
+                        
                         <div className='record' key={item._id}>
                             <h1>{item.title}</h1>
                             <p>Reps: {item.reps}</p>
@@ -40,9 +51,11 @@ const Records = () => {
                             <button style={{backgroundColor:' #e7195a '}} onClick={() => { handleDeleteData(item._id) }}>Delete</button>
                             </div>
                         </div>
+                       
                     )
                 })
             }
+             </div>
             </div>
         </>
     )
