@@ -2,6 +2,7 @@
 const mongoose = require('mongoose')
 const bcrypt = require('bcrypt')
 
+
 const userSchema = mongoose.Schema({
     email: {
         type: String,
@@ -10,7 +11,8 @@ const userSchema = mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        minlength:8
     },
 },
     { timestamp: true }

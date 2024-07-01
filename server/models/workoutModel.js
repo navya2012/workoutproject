@@ -26,4 +26,17 @@ const workoutSchema = mongoose.Schema({
 
 const workoutModel = new mongoose.model("workout", workoutSchema)
 
+// const addWorkoutData = async (title, reps, load, user_id) => {
+// console.log(title, reps, load, user_id)
+//     try{
+//         console.log("new data")
+  
+//         const workoutData = await workoutModel.create({title, reps, load, user_id})
+//         return workoutData
+//     }
+//     catch(err){
+//         console.log(err)
+//     }
+// }
+
 module.exports = workoutModel

@@ -9,6 +9,7 @@ const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     const { signup, error } = useSignUp()
+    console.log(error)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -48,7 +49,15 @@ const SignUp = () => {
                         </div>
                     </div>
                     <button>Submit</button>
-                    {error && <p>{error}</p>}
+                    {error && (
+                <div style={{ color: 'red', marginBottom: '10px' }}>
+                    {Array.isArray(error) ? (
+                        error.map((err, index) => <p key={index}>{err.msg}</p>)
+                    ) : (
+                        <p>{error}</p>
+                    )}
+                </div>
+            )}
                 </form>
             </div>
         </>
