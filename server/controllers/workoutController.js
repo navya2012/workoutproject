@@ -32,8 +32,8 @@ const createWorkoutData = async (req,res) => {
 
     try{
         const newWorkoutData = new workoutModels({title, reps, load, user_id})
-        const workoutData = await newWorkoutData.save()
-        res.status(201).json(workoutData)
+        await newWorkoutData.save()
+        res.status(201).json({message: "Data Successfully Created"})
     }
     catch(err){
         res.status(400).json({error:err.message})
@@ -44,8 +44,8 @@ const createWorkoutData = async (req,res) => {
 const updateWorkoutData = async (req,res) => {
     try{
         const id = req.params.id
-        const updateWorkoutData = await workoutModels.findByIdAndUpdate({_id:id}, req.body,{new:true})
-        res.status(201).json(updateWorkoutData)
+     await workoutModels.findByIdAndUpdate({_id:id}, req.body,{new:true})
+        res.status(201).json({message: "Data Successfully Updated"})
     }
     catch(err){
         res.status(400).json({error:err.message})
@@ -53,16 +53,20 @@ const updateWorkoutData = async (req,res) => {
 }
 
 //delete data
-const deleteWorkoutData = async (req,res) => {
-    try{
-        const id = req.params.id
-        const deleteWorkoutData = await workoutModels.findByIdAndDelete({_id:id})
-        res.status(201).json(deleteWorkoutData)
+const deleteWorkoutData = async (req, res) => {
+    try {
+        const id = req.params.id;
+        if (id) {
+            await workoutModels.findByIdAndDelete({ _id: id });
+            res.status(201).json({ message: "Data Successfully Deleted" });
+        } else {
+            await workoutModels.deleteMany({});
+            res.status(201).json({ message: "Deleted All The Data Successfully" });
+        }
+    } catch (err) {
+        res.status(400).json({ error: err.message });
     }
-    catch(err){
-        res.status(400).json({error:err.message})
-    }
-}
+};
 
 module.exports = {
     getWorkoutData,

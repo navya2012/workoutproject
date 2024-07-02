@@ -23,12 +23,12 @@ const loginDetails = async (req,res) => {
 const signUpDetails = async (req,res) => {
    const {  email,password} = req.body
    try{
-    // store data into db
+    // store data into db+
     const user = await userModels.signup(email,password)
 
     // Validation check
-    const error = validationResult(req).formatWith(({  msg,value }) => {
-        return { msg, value };
+    const error = validationResult(req).formatWith(({  msg }) => {
+        return { msg };
     });
     if (!error.isEmpty()) {
         return res.status(400).json({ error: error.array() });

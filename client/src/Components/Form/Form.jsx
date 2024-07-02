@@ -4,6 +4,7 @@ import axios from 'axios'
 import './FormStyles.css'
 import useAuthContext from '../../Hooks/useAuthContext'
 
+
 const Form = () => {
 
   const {user} = useAuthContext()
@@ -23,7 +24,7 @@ const Form = () => {
 
   const createSubmitData = async (e) => {
     e.preventDefault()
-
+  
     const response = await axios.post('http://localhost:4000/api/workouts', form,  {
       headers:{
         "Authorization" : `Bearer ${user?.token}`
@@ -36,6 +37,7 @@ const Form = () => {
       load: ''
     })
     getWorkoutsData()
+
   }
 
   //update data

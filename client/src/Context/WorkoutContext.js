@@ -2,9 +2,8 @@ import axios from 'axios'
 import React, {  createContext, useState } from 'react'
 import useAuthContext from '../Hooks/useAuthContext'
 
+
 export const WorkoutDataList = createContext( )
-
-
 
 const WorkoutContext = ({children}) => {
   const {user} = useAuthContext()
@@ -19,7 +18,7 @@ const WorkoutContext = ({children}) => {
 
   //get
   const getWorkoutsData = async () => {
-    try{
+
     const response = await axios.get('http://localhost:4000/api/workouts', {
       headers:{
         "Authorization" : `Bearer ${user.token}`
@@ -27,10 +26,7 @@ const WorkoutContext = ({children}) => {
     })
     const data = response.data
     setWorkoutData(data)
-    }
-    catch(err){
-      console.log(err.message)
-    }
+    
   }
 
   //update data

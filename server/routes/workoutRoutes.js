@@ -8,7 +8,7 @@ const authUser = require("../middleware/userMiddleware")
 //controllers
 const { getWorkoutData, getWorkoutDataById, createWorkoutData, updateWorkoutData, deleteWorkoutData } = require('../controllers/workoutController')
 
- router.use(authUser)
+router.use(authUser)
 
 
 //get entire data 
@@ -24,7 +24,7 @@ router.post('/', createWorkoutData)
 router.patch('/:id', updateWorkoutData)
 
 //delete data
-router.delete('/:id', deleteWorkoutData)
+router.delete('/:id?', deleteWorkoutData)
 
 
 module.exports = router
